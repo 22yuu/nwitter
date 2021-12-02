@@ -6,7 +6,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
-} from "@firebase/auth";
+} from "firebase/auth";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -52,15 +52,12 @@ const Auth = () => {
     let provider;
     if (name === "google") {
       provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(authService, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(rsult);
       // const token = credential.accessToken;
     } else if (name === "github") {
       provider = new GithubAuthProvider();
-      const result = await signInWithPopup(authService, provider);
-      const credential = GithubAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
     }
+    await signInWithPopup(authService, provider);
   };
   return (
     <div>
@@ -92,11 +89,9 @@ const Auth = () => {
       </span>
       <div>
         <button onClick={onSocialClick} name="google">
-          {" "}
           Continue With Google
         </button>
         <button onClick={onSocialClick} name="github">
-          {" "}
           Continue With Github
         </button>
       </div>
